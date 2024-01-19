@@ -2,35 +2,18 @@ pipeline {
     agent any
 
     stages {
-        stage('Install Maven') {
+        stage('build') {
             steps {
                 script {
-                    sh 'apt-get update'
-                    sh 'apt-get install -y maven'
+                    sh "mvn clean package"
                 }
             }
         }
 
-        stage('Set Maven Path') {
+        stage('test') {
             steps {
                 script {
-                    sh 'export PATH=$PATH:/path/to/maven/bin'
-                }
-            }
-        }
-
-        stage('Build') {
-            steps {
-                script {
-                    sh 'mvn clean package'
-                }
-            }
-        }
-
-        stage('Test') {
-            steps {
-                script {
-                    sh 'mvn test'
+                    sh "mvn test"
                 }
             }
         }
