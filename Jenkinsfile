@@ -1,6 +1,6 @@
-pipeline{
-    agent{
-        label 'aws-agent'
+pipeline {
+    agent any
+      
     }
     stages{
         stage('build'){
